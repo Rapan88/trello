@@ -1,4 +1,5 @@
 import {useState} from "react";
+import BoardItem from "./Components/BoardItem";
 
 function App() {
     const [boards, setBoards] = useState([
@@ -128,7 +129,7 @@ function App() {
     return (
         <div className="w-screen h-screen bg-amber-50 flex p-5">
             {boards.map((board =>
-                    <div className="bg-gray-100 w-3/12 h-max h-56 border border-black rounded-2xl"
+                    <div className="bg-gray-100 w-3/12 h-max border border-black rounded-2xl"
                          onDragOver={(e) => {
                              dragOverHandler(e)
                          }}
@@ -141,27 +142,9 @@ function App() {
                         </div>
                         <hr/>
                         {board.items.map((item =>
-                                <div className="border m-2 rounded bg-white p-2 shadow"
-                                     draggable={true}
-                                     onDragOver={(e) => {
-                                         dragOverHandler(e)
-                                     }}
-                                     onDragLeave={(e) => {
-                                         dragLeaveHandler(e)
-                                     }}
-                                     onDragStart={(e) => {
-                                         dragStartHandler(e, board, item)
-                                     }}
-                                     onDragEnd={(e) => {
-                                         dragEngHandler(e)
-                                     }}
-                                     onDrop={(e) => {
-                                         dropHandler(e, board, item)
-                                     }}
-                                >
-
-                                    {item.title}
-                                </div>
+                                <BoardItem item={item} board={board} dragOverHandler={dragOverHandler}
+                                           dragLeaveHandler={dragLeaveHandler} dragEngHandler={dragEngHandler}
+                                           dragStartHandler={dragStartHandler} dropHandler={dropHandler}></BoardItem>
                         ))}
                         {board.isInput ? <div><input className="h-16 w-80 p-2 m-3 shadow" value={text} type={"text"}
                                                      onChange={(e) => setText(e.target.value)} placeholder="Введіть заголовок для цієї
