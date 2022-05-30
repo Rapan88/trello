@@ -1,8 +1,8 @@
 import React from 'react';
 
-const BoardItem = ({board, item, dragOverHandler, dragLeaveHandler, dragStartHandler, dragEngHandler, dropHandler}) => {
+const BoardItem = ({board, item, dragOverHandler, dragLeaveHandler, dragStartHandler, dragEngHandler, dropHandler, editTheBoardItem}) => {
     return (
-        <div className="border m-2 rounded bg-white p-2 shadow"
+        <div className="border m-2 rounded bg-white p-1 shadow hover:bg-gray-100"
              draggable={true}
              onDragOver={(e) => {
                  dragOverHandler(e)
@@ -18,6 +18,9 @@ const BoardItem = ({board, item, dragOverHandler, dragLeaveHandler, dragStartHan
              }}
              onDrop={(e) => {
                  dropHandler(e, board, item)
+             }}
+             onClick={(e) =>{
+                 editTheBoardItem(board,item,e)
              }}
         >
             {item.title}
